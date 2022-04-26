@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% block title %}{% endblock %}
+
+{% block content %}
+
+
+
+<h1>New Quiz Entry</h1>
+<form method="POST">
+    {{ form.csrf_token }}
+    <table>
+        <tr>
+            <td>{{ form.inquery.label }}</td>
+            <td>{{ form.inquery }}</td>
+        </tr>
+        <tr>
+            <td>{{ form.option_1.label }}</td>
+            <td>{{ form.option_1 }}</td>
+        </tr>
+        <tr>
+            <td>{{ form.option_2.label }}</td>
+            <td>{{ form.option_2 }}</td>
+        </tr>
+        <tr>
+            <td>{{ form.option_3.label }}</td>
+            <td>{{ form.option_3 }}</td>
+        </tr>
+        <tr>
+            <td>{{ form.option_4.label }}</td>
+            <td>{{ form.option_4 }}</td>
+        </tr>
+         <tr>
+            <td>{{ form.answer.label }}</td>
+            <td>
+                {% for opt in form.answer %}
+                    {{ opt.label }}{{ opt }}
+                {% endfor %}
+            </td>
+        </tr>
+    </table>
+    <br>
+    {{ form.submit() }}
+</form>
+{% endblock %}

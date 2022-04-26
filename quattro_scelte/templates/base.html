@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Quattro Scelte{% endblock %}</title>
+</head>
+<body>
+<header>
+    <a href="{{ url_for('views.index') }}">Quattro Scelte</a>
+    <a href="{{ url_for('views.quiz_entry') }}">クイズ登録</a>
+    <a href="{{ url_for('views.quiz') }}">クイズ</a>
+</header>
+
+{% with messages = get_flashed_messages() %}
+    {% if messages %}
+        <ul>
+        {% for message in messages %}
+            <li>{{ message }}</li>
+        {% endfor %}
+        </ul>
+    {% endif %}
+{% endwith %}
+
+{% block content  %}
+{% endblock %}
+</body>
+</html>
