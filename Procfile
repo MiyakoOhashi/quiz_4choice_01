@@ -1,1 +1,1 @@
-web: gunicorn quattro_scelte --log-file -
+web: gunicorn gettingstarted.wsgi --log-file -
