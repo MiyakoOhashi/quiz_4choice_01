@@ -1,1 +1,1 @@
-web: gunicorn quattro_scelte:app --log-file -
+web: gunicorn quattro_scelte --log-file -
