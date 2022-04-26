@@ -1,5 +1,4 @@
 # quattro_scelte/__init__.py        2022/04/25  M.O
-import os
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
@@ -24,9 +23,4 @@ def create_app(test_config=False):
     # migrate.init_app(app, db)
 
     return app
-
-
-if __name__ == '__main__':
-    create_app().run(host="0.0.0.0", post=int(os.environ.get("PORT", 5000)))
-
 
