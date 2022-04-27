@@ -1,6 +1,17 @@
 # quattro_scelte/config.py        2022/04/25  M.O
+import os
 
-SQLALCHEMY_DATABASE_URI = ''
+# postgresql設定
+# postgres_uri = os.environ.get('DATABASE_URI')
+# if postgres_uri.startswith("postgres://"):
+#     postgres_uri = postgres_uri.replace("postgres://", "postgresql://", 1)
+#
+# # sqlite(local用)設定
+# basedir = os.path.abspath(os.path.dirname(__name__))
+# sqlite_uri = "sqlite:///" + os.path.join(basedir, 'data.sqlite')
+#
+#
+# SQLALCHEMY_DATABASE_URI = postgres_uri or sqlite_uri
 SQLALCHEMY_TRACK_MODIFICATIONS = True
 
 # os.urandom(24)
