@@ -3,7 +3,7 @@
 
 {% block content %}
 <h1>Quiz</h1>
-{{ question }}
+{{ question.inquery }}
 <form method="POST">
     {{ form.csrf_token }}
     <table>
