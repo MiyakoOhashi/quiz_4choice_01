@@ -1,8 +1,7 @@
-from flask import session
 from wtforms.form import Form
-from wtforms.fields import StringField, TextAreaField, RadioField, SubmitField
+from wtforms.fields import StringField, TextAreaField, \
+    RadioField, SubmitField, SelectField
 from wtforms.validators import DataRequired
-from .models import Question
 
 
 class QuizEntryForm(Form):
@@ -19,7 +18,7 @@ class QuizEntryForm(Form):
 
 class QuizAnswerForm(Form):
     answer = RadioField('回答',
-                        choices=[(0, ('1')), (1, ('2')), (2, ('3')), (3, ('4'))],
+                        choices=[(0, ('0')), (1, ('1')), (2, ('2')), (3, ('3'))],
                         validators=[DataRequired()])
     submit = SubmitField('送信')
 

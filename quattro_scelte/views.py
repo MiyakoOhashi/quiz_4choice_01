@@ -15,12 +15,16 @@ def index():
 @views.route('/quiz', methods=['GET', 'POST'])
 def quiz():
     question_volume = Question.query.count()
+    if question_volume <= 0:
+        flash(message='クイズがありません。クイズを登録しましよう！')
+        return redirect(url_for('views.quiz_entry'))
+
     set_id = random.randint(1, question_volume)
+    print(set_id)
     question = Question.query.filter_by(id=set_id).first()
     form = QuizAnswerForm(request.form)
-
     if request.method == 'POST' and form.validate():
-        if question.answer == form.answer.data:
+        if int(question.answer) == int(form.answer.data):
             session['result'] = True
         else:
             session['result'] = False
@@ -30,7 +34,7 @@ def quiz():
 
 @views.route('/quiz_result', methods=['GET'])
 def quiz_result():
-    return render_template('quiz_result.html', result=session['result'])
+    return render_template('quiz_result.html')
 
 
 @views.route('/quiz_entry', methods=['GET', 'POST'])

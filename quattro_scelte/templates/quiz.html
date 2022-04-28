@@ -13,10 +13,9 @@
         {% for opt in form.answer %}
             <tr>
                 <td>{{ opt }}</td>
-                <td>{{ opt.label }}</td>
+                <td>{{ question.options[loop.index0] }}</td>
             </tr>
         {% endfor %}
-
     </table>
     <br>
     {{ form.submit() }}
