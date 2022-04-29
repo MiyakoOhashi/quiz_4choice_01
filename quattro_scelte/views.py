@@ -1,5 +1,6 @@
 # quattro_scelte/views/views.py        2022/04/25  M.O
 import random
+from datetime import datetime
 from flask import request, redirect, url_for, render_template, \
     session, Blueprint, current_app, flash
 from .models import Question
@@ -12,15 +13,19 @@ def index():
     session['comp'] = False
     return render_template('index.html')
 
-@views.route('/quiz', methods=['GET', 'POST'])
-def quiz():
+
+@views.route('/quiz', methods=['GET'])
+def quiz_prepare():
     question_volume = Question.query.count()
     if question_volume <= 0:
         flash(message='クイズがありません。クイズを登録しましよう！')
         return redirect(url_for('views.quiz_entry'))
-
     set_id = random.randint(1, question_volume)
-    print(set_id)
+    return redirect(url_for('views.quiz', set_id=set_id))
+
+
+@views.route('/quiz/<int:set_id>', methods=['GET', 'POST'])
+def quiz(set_id):
     question = Question.query.filter_by(id=set_id).first()
     form = QuizAnswerForm(request.form)
     if request.method == 'POST' and form.validate():
@@ -41,15 +46,17 @@ def quiz_result():
 def quiz_entry():
     if session['comp']:
         flash(message='クイズを登録しました！')
-        session.pop('comp', False)
+        session['comp'] = False
 
     form = QuizEntryForm(request.form)
     if request.method == 'POST' and form.validate():
         question = Question(
             inquery=form.inquery.data,
             options=[form.option_1.data, form.option_2.data,
-                     form.option_3.data, form.option_4.data],
-            answer=form.answer.data
+                       form.option_3.data, form.option_4.data],
+            answer=form.answer.data,
+            create_at=datetime.now(),
+            update_at=datetime.now()
         )
         question.add_question()
         session['comp'] = True
