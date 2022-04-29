@@ -20,6 +20,8 @@ def create_app(test_config=False):
     app.register_blueprint(views)
 
     db.init_app(app)
+    app.app_context().push()
+
     migrate.init_app(app, db)
 
     return app
