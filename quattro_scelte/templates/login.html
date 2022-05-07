@@ -1,0 +1,22 @@
+{% from "_formhelpers.html" import render_field %}
+{% extends 'base.html' %}
+{% block title %}{% endblock %}
+
+{% block content %}
+<main role="main" class="container">
+    <div class="jumbotron text-center">
+        <h1>ログイン</h1><br>
+        <div>
+            <form method="POST">
+                {{ form.csrf_token }}
+                {{ render_field(form.username) }}
+                {{ render_field(form.password) }}
+                <br>
+                {{ form.submit(class="btn btn-secondary") }}
+            </form>
+            <br>
+            <p>ユーザ登録がまだの場合<a href="{{ url_for('views.register') }}">ユーザ登録</a>してください</p>
+        </div>
+    </div>
+</main>
+{% endblock %}

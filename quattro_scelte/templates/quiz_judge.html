@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block title %}{% endblock %}
+
+{% block content %}
+<META http-equiv="Refresh" content="1;URL={{ url_for('views.quiz_prepare') }}">
+<main role="main" class="container">
+    <div class="jumbotron text-center">
+        <h1>判定</h1>
+        <p class="lead text-muted">このクイズは...</p>
+        <br>
+        {% if session['result'] %}
+            <h3>正解！</h3>
+        {% else %}
+            <h3>はずれ！残念！</h3>
+        {% endif %}
+    </div>
+
+</main>
+{% endblock %}

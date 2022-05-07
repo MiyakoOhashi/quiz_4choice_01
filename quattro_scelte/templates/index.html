@@ -2,6 +2,13 @@
 {% block title %}{% endblock %}
 
 {% block content %}
-
-<h1>Quattro Scelte</h1>
+<main role="main" class="container">
+    <div class="jumbotron">
+        <h4>Not Ultimate 4</h4><br>
+        <h1>ぜんぜん究極じゃない４択クイズ</h1><br>
+        <p class="lead text-muted">気楽ぅ〜な４択クイズサイトです。暇つぶしにどうぞ( ^ω^ ) 登録しなくても挑戦できるよ！</p>
+        <p class="lead text-muted">もしクイズを登録したかったらユーザ登録してね！</p>
+        <a class="btn btn-lg btn-info" href="{{ url_for('views.quiz_start') }}" role="button">クイズへ! &raquo;</a>
+    </div>
+</main>
 {% endblock %}

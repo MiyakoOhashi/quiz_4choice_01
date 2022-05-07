@@ -6,6 +6,9 @@ from flask_login import LoginManager
 
 db = SQLAlchemy()
 migrate = Migrate()
+login_manager = LoginManager()
+login_manager.login_view = 'views.login'
+login_manager.login_message = 'ログインしてください'
 
 def create_app(test_config=False):
 
@@ -23,6 +26,8 @@ def create_app(test_config=False):
     with app.app_context():
         db.create_all()
     migrate.init_app(app, db)
+
+    login_manager.init_app(app)
 
     return app
 

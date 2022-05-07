@@ -1,0 +1,52 @@
+{% from "_formhelpers.html" import render_field_q %}
+{% extends 'base.html' %}
+{% block title %}{% endblock %}
+
+{% block content %}
+
+
+<main role="main" class="container">
+    <div class="jumbotron text-center" style="height: 500px;">
+        <h1>既登録クイズ</h1>
+        <br>
+        <div>
+            <table align="center">
+                <tr align="left">
+                    <td>問題：　</td>
+                    <td>{{ question.inquery }}</td>
+                </tr>
+                <tr><td></td></tr>
+                {% for option in question.options %}
+                <tr align="left">
+                    <td>選択肢{{ loop.index }}：　</td>
+                    <td>{{ option }}</td>
+                </tr>
+                {% endfor %}
+                <tr><td></td></tr>
+                <tr align="left">
+                    <td>正解No.：　</td>
+                    <td>{{ question.answer }}</td>
+                </tr>
+            </table>
+            <br>
+            <table align="center">
+                <tr>
+                    <td>
+                        <a class="btn btn-secondary" href="{{ url_for('views.quiz_modify', user_id=current_user.id, quiz_id=question.id) }}">編集する</a>
+                    </td>
+                    <td>
+                        <form method="POST" action="{{ url_for('views.quiz_delete', user_id=current_user.id) }}">
+                            {{ delete_form.csrf_token }}
+                            {{ delete_form.id(value=question.id) }}
+                            {{ delete_form.submit(class="btn btn-danger") }}
+                        </form>
+                    </td>
+                    <td>
+                        <a class="btn btn-outline-info" href="{{ url_for('views.user') }}">ユーザページに戻る</a>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</main>
+{% endblock %}

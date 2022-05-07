@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block title %}{% endblock %}
+
+{% block content %}
+<main role="main" class="container">
+    <div class="jumbotron text-center">
+        <h1>クイズスタート!</h1>
+        <p class="lead text-muted">全部で10問出題します。がんばってたくさん当てましょう！</p>
+        <br>
+        <a class="btn btn-lg btn-info" href="{{ url_for('views.quiz_prepare') }}" role="button">スタート! &raquo;</a>
+    </div>
+</main>
+{% endblock %}

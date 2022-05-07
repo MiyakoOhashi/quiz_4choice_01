@@ -1,0 +1,52 @@
+/* Show it's not fixed to the top */
+body {
+    min-height: 75rem;
+}
+
+.jumbotron {
+    background-color: #e6e6fa;
+}
+
+.btn-check {
+    autocomplete: "off";
+    display: none;
+
+}
+
+.btn-group-vertical .btn {
+    min-width: 200px;
+}
+
+.btn-check:checked + label {
+    color:#fff;
+    background-color:#17a2b8!important;
+}
+
+.btn-group .btn-check {
+    display: none;
+}
+
+.field_q_dt {
+    float: left;
+    clear: left;
+    margin-rigit: 0.5em;
+    width: 80px;
+}
+
+.field_q_dd {
+    float: left;
+    margin-left: 1em;
+}
+
+.quiz-entry-form {
+    margin-left: auto;
+    margin-right: auto;
+    width: 300px;
+}
+
+.field_q_dd .btn {
+    clear: both;
+    margin-left: auto;
+    margin-right: auto;
+
+}

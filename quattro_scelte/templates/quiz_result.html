@@ -2,10 +2,52 @@
 {% block title %}{% endblock %}
 
 {% block content %}
-<h1>Result</h1>
-{% if session['result'] %}
-    <h2>正解！</h2>
-{% else %}
-    <h2>残念！</h2>
-{% endif %}
+<main role="main" class="container">
+    <div class="jumbotron text-center">
+        <h1>結果発表</h1>
+        {% if current_user.is_authenticated %}
+            <h5>{{ current_user.username }}さん</h5>
+        {% else %}
+            <h5>ゲストさん</h5>
+        {% endif %}
+        <br>
+        {% set acc_rate = 100 * session['quiz_correct'] / session['quiz_num'] %}
+        <h4>正解率は{{ acc_rate | int }}％です！</h4>
+        <br>
+        {% if acc_rate == 100 %}
+            <p class="lead text-muted">パーフェクト！</p>
+        {% elif acc_rate >= 80　%}
+            <p class="lead text-muted">すごいね！</p>
+        {% elif acc_rate >= 50 %}
+            <p class="lead text-muted">なかなか！</p>
+        {% elif acc_rate >= 30 %}
+            <p class="lead text-muted">がんばれ！</p>
+        {% else %}
+            <p class="lead text-muted">そんな日もある！</p>
+        {% endif %}
+        <br>
+        <a class="btn btn-info" href="{{ url_for('views.quiz_start') }}">もう一回！</a>
+        {% if current_user.is_authenticated %}
+            <a class="btn btn-secondary" href="{{ url_for('views.user') }}">ユーザベージ</a>
+        {% endif %}
+    </div>
+    <div>
+        <table align="center" border="1" style="border-collapse: collapse">
+            <tr>
+                <th>No.</th>
+                <th>問題</th>
+                <th>あなたの回答</th>
+                <th>正否</th>
+            </tr>
+            {% for result in results %}
+            <tr>
+                <td>{{ loop.index }}</td>
+                <td>{{ result[0] }}</td>
+                <td>{{ result[1] }}</td>
+                <td>{{ result[2] }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+</main>
 {% endblock %}

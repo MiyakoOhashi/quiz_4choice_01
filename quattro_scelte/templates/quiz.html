@@ -2,22 +2,25 @@
 {% block title %}{% endblock %}
 
 {% block content %}
-<h1>Quiz</h1>
-{{ question.inquery }}
-<form method="POST">
-    {{ form.csrf_token }}
-    <table>
-        <tr>
-            <td>{{ form.answer.label }}</td>
-        </tr>
-        {% for opt in form.answer %}
-            <tr>
-                <td>{{ opt }}</td>
-                <td>{{ question.options[loop.index0] }}</td>
-            </tr>
-        {% endfor %}
-    </table>
-    <br>
-    {{ form.submit() }}
-</form>
+<main role="main" class="container">
+    <div class="jumbotron text-center">
+        <h1>クイズ</h1>
+        <h4>{{ session['quiz_count'] }}問目</h4>
+        <p class="lead text-muted">{{ question.inquery }}</p><br>
+        <form method="POST">
+            {{ form.csrf_token }}
+            <p>{{ form.answer.label }}</p>
+                <div class="btn-group-vertical">
+                {% for opt in form.answer %}
+                    {{ opt(class="btn-check") }}
+                    {{ opt.label(class="btn btn-outline-info") }}
+                {% endfor %}
+                </div>
+            <br>
+            {{ form.submit(class="btn btn-secondary") }}
+        </form>
+    </div>
+
+
+</main>
 {% endblock %}

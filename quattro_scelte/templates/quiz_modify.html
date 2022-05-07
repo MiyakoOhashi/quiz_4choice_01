@@ -7,9 +7,9 @@
 
 <main role="main" class="container">
     <div class="jumbotron text-center" style="height: 500px;">
-        <h1>新クイズ登録</h1>
+        <h1>既登録クイズ修正</h1>
         <br>
-        <div class="quiz-entry-form">
+        <div  class="quiz-entry-form">
             <form method="POST">
                 {{ form.csrf_token }}
                 {{ render_field_q(form.inquery) }}
@@ -33,6 +33,9 @@
                     <br>
                     <dd class="field_q_dd">
                         {{ form.submit(class="btn btn-secondary") }}
+                    </dd>
+                    <dd class="field_q_dd">
+                        <a class="btn btn-outline-secondary" href="{{ url_for('views.user') }}">登録せず戻る</a>
                     </dd>
                 </dt>
             </form>

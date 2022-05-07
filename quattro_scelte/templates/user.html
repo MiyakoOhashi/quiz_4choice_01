@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% block title %}{% endblock %}
+
+{% block content %}
+<main role="main" class="container">
+    <div class="jumbotron text-center">
+        {% if current_user.is_authenticated %}
+            <h3>{{ current_user.username }}さん</h3>
+        {% endif %}
+        <br>
+        {% if all_acc_rate %}
+            <h6>あなたの今までのクイズ正解率は{{ all_acc_rate | int }}％です！</h6>
+        {% else %}
+            <h6>ようこそ究極じゃない４択クイズへ！</h6>
+        {% endif %}
+    </div>
+
+    <div class="container text-center">
+        <h6>あなたが登録したクイズ</h6>
+        <table align="center">
+            <tr>
+                <th>No.</th>
+                <th align="left">問題</th>
+                <th></th>
+            </tr>
+            {% for quiz in regist_quizes %}
+            <tr>
+                <td>{{ quiz.id }}. </td>
+                <td align="left">{{ quiz.inquery }}</td>
+                <td style="width: 60px;">
+                    <a class="btn btn-outline-info" href="{{ url_for('views.quiz_detail', user_id=current_user.id, quiz_id=quiz.id) }}">詳細</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+
+</main>
+{% endblock %}
