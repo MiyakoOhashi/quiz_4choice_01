@@ -3,8 +3,8 @@ import os
 
 # postgresql設定
 postgres_uri = os.environ.get('DATABASE_URL')
-# if postgres_uri.startswith("postgres://"):
-#     postgres_uri = postgres_uri.replace("postgres://", "postgresql://", 1)
+if postgres_uri.startswith("postgres://"):
+    postgres_uri = postgres_uri.replace("postgres://", "postgresql://", 1)
 
 # sqlite(local用)設定
 basedir = os.path.abspath(os.path.dirname(__name__))
