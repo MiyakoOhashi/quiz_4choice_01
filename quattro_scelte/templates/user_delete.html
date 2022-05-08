@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block title %}{% endblock %}
+
+{% block content %}
+<main role="main" class="container">
+    <div class="jumbotron text-center">
+        <p class="lead text-muted">削除すると、今までの情報はすべて見られなくなります。削除しますか？</p>
+        <br>
+        <form method="POST" action="{{ url_for('views.user_delete', user_id=current_user.id) }}">
+            {{ form.csrf_token }}
+            {{ form.id(value=current_user.id) }}
+            {{ form.submit(class="btn btn-danger") }}
+        </form>
+
+    </div>
+</main>
+{% endblock %}

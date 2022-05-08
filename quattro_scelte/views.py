@@ -6,7 +6,7 @@ from flask import request, redirect, url_for, render_template, \
 from flask_login import login_user, login_required, logout_user, current_user
 from .models import Question, User, Result
 from .forms import QuizEntryForm, QuizAnswerForm, LoginForm, RegisterForm,\
-    QuizModifyForm, QuizDeleteForm
+    QuizModifyForm, QuizDeleteForm, UserDeleteForm
 
 views = Blueprint('views', __name__, url_prefix='')
 
@@ -198,6 +198,7 @@ def register():
 def user():
     regist_quizes = Question.query.filter_by(user_id=current_user.id).all()
     quiz_results = Result.query.filter_by(user_id=current_user.id).all()
+
     responded_num = 0
     corrected_num = 0
     for result in quiz_results:
@@ -211,6 +212,21 @@ def user():
         all_acc_rate=all_acc_rate)
 
 
+@views.route('/user_delete/<int:user_id>', methods=['GET', 'POST'])
+@login_required
+def user_delete(user_id: int):
+    form = UserDeleteForm(request.form)
+    if request.method == 'POST' and form.validate():
+        user = User.query.get(form.id.data)
+        if user_id != current_user.id or current_user.id != user.id:
+            flash(message='削除できません')
+            return redirect(url_for('views.index'))
+        user.delete_user()
+        flash(message='ユーザ登録を削除しました')
+        return redirect(url_for('views.index'))
+    return render_template('user_delete.html', form=form)
+
+
 @views.route('/quiz_detail/<int:user_id>/<int:quiz_id>')
 @login_required
 def quiz_detail(user_id: int, quiz_id: int):
@@ -221,11 +237,7 @@ def quiz_detail(user_id: int, quiz_id: int):
     delete_form = QuizDeleteForm(request.form)
     if not question:
         return redirect(url_for('views.user'))
-
     return render_template('quiz_detail.html', question=question, delete_form=delete_form)
-
-
-
 
 
 @views.app_errorhandler(404)

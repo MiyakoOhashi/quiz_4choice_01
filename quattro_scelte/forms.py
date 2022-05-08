@@ -82,3 +82,7 @@ class RegisterForm(Form):
             raise ValidationError('このユーザーネームはすでに使用されています')
 
 
+class UserDeleteForm(Form):
+    id = HiddenField()
+    submit = SubmitField('ユーザ登録を削除します')
+

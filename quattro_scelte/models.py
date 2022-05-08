@@ -94,6 +94,11 @@ class User(db.Model, UserMixin):
         for question in self.questions:
             print(question.id)
 
+    def delete_user(self):
+        with db.session.begin(subtransactions=True):
+            db.session.delete(self)
+        db.session.commit()
+
 
 class Result(db.Model):
 

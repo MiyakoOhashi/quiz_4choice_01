@@ -7,7 +7,7 @@
 
 <main role="main" class="container">
     <div class="jumbotron text-center" style="height: 500px;">
-        <h1>既登録クイズ</h1>
+        <h1>既登録クイズ詳細</h1>
         <br>
         <div>
             <table align="center">
@@ -25,7 +25,7 @@
                 <tr><td></td></tr>
                 <tr align="left">
                     <td>正解No.：　</td>
-                    <td>{{ question.answer }}</td>
+                    <td>{{ question.answer + 1 }}</td>
                 </tr>
             </table>
             <br>
@@ -35,7 +35,7 @@
                         <a class="btn btn-secondary" href="{{ url_for('views.quiz_modify', user_id=current_user.id, quiz_id=question.id) }}">編集する</a>
                     </td>
                     <td>
-                        <form method="POST" action="{{ url_for('views.quiz_delete', user_id=current_user.id) }}">
+                        <form method="POST" action="{{ url_for('views.quiz_delete') }}">
                             {{ delete_form.csrf_token }}
                             {{ delete_form.id(value=question.id) }}
                             {{ delete_form.submit(class="btn btn-danger") }}

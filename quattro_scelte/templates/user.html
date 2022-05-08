@@ -9,14 +9,20 @@
         {% endif %}
         <br>
         {% if all_acc_rate %}
-            <h6>あなたの今までのクイズ正解率は{{ all_acc_rate | int }}％です！</h6>
+            <p class="lead text-muted">あなたの今までのクイズ正解率は{{ all_acc_rate | int }}％です！</p>
         {% else %}
-            <h6>ようこそ究極じゃない４択クイズへ！</h6>
+            <p class="lead text-muted">ようこそ究極じゃない４択クイズへ！</p>
         {% endif %}
+        <br>
+        <a class="btn btn-info" href="{{ url_for('views.quiz_start') }}">クイズスタート！</a>
     </div>
 
     <div class="container text-center">
-        <h6>あなたが登録したクイズ</h6>
+        <h5>あなたが登録したクイズ</h5>
+        <br>
+        {% if not regist_quizes %}
+        <p>まだないよ！</p>
+        {% else %}
         <table align="center">
             <tr>
                 <th>No.</th>
@@ -33,7 +39,9 @@
             </tr>
             {% endfor %}
         </table>
+        {% endif %}
+        <br>
+        <a class="btn btn-danger" href="{{ url_for('views.user_delete', user_id=current_user.id) }}">ユーザ登録削除</a>
     </div>
-
 </main>
 {% endblock %}
